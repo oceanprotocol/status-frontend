@@ -1,9 +1,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { ReactElement, useEffect, useState } from 'react'
+import { Status } from '../@types'
 import styles from '../styles/Home.module.css'
+import { getData } from '../utils/getData'
 
-const Home: NextPage = () => {
+export default function HomePage(): ReactElement {
+  const [statuses, setStatuses] = useState<Status[]>()
+
+  useEffect(() => {
+    async function getStatuses() {
+      const data = await getData()
+      data && setStatuses(data)
+      console.log('statuses', statuses)
+    }
+    getStatuses()
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -66,5 +80,3 @@ const Home: NextPage = () => {
     </div>
   )
 }
-
-export default Home
