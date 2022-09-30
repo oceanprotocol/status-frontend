@@ -1,5 +1,7 @@
 # status-frontend
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/70cdb7df-cc24-43a0-96fc-5ac501dc31ac/deploy-status)](https://app.netlify.com/sites/ocean-status/deploys)
+
 Frontend client for showing the status of Ocean Protocol services
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
