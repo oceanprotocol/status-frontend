@@ -21,14 +21,14 @@ export interface Status {
   lastUpdatedOn: number
 }
 export interface ProviderStatus {
-  status?: State
+  status: State
   response?: number
   version?: string
   latestRelease?: string
 }
 
 export interface AquariusStatus {
-  status?: State
+  status: State
   response?: number
   validChainList?: boolean
   version?: string
@@ -38,7 +38,7 @@ export interface AquariusStatus {
   validQuery?: boolean
 }
 export interface SubgraphStatus {
-  status?: State
+  status: State
   response?: number
   version?: string
   latestRelease?: string
@@ -46,7 +46,7 @@ export interface SubgraphStatus {
 }
 
 export interface OperatorStatus {
-  status?: State
+  status: State
   response?: number
   version?: string
   latestRelease?: string
@@ -54,7 +54,7 @@ export interface OperatorStatus {
   limitReached?: boolean
 }
 export interface FaucetStatus {
-  status?: State
+  status: State
   response?: number
   ethBalance?: BigNumber
   ethBalanceSufficient?: boolean
@@ -71,41 +71,7 @@ export interface Network {
   oceanAddress?: string
 }
 
-export interface dbRow {
-  network: string
-  currentBlock: number
-  aquariusStatus: State
-  aquariusResponse: number
-  aquariusChain: number
-  aquariusVersion: string
-  aquariusMonitorVersion: string
-  aquariusLatestRelease: string
-  aquariusBlock: number
-  aquariusValidQuery: number
-  providerStatus: State
-  providerResponse: number
-  providerVersion: string
-  providerLatestRelease: string
-  subgraphStatus: State
-  subgraphResponse: number
-  subgraphVersion: string
-  subgraphLatestRelease: string
-  subgraphBlock: number
-  operatorStatus: State
-  operatorResponse: number
-  operatorVersion: string
-  operatorLatestRelease: string
-  operatorEnvironments: number
-  operatorLimitReached: number
-  market: State
-  port: State
-  faucetStatus: State
-  faucetResponse: number
-  faucetEthBalance: BigNumber
-  faucetEthBalanceSufficient: number | string
-  faucetOceanBalance: BigNumber
-  faucetOceanBalanceSufficient: number | string
-  dataFarming: State
-  daoGrants: State
-  lastUpdatedOn: number
+export interface Data {
+  component: string
+  status: State
 }

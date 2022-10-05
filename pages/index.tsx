@@ -1,22 +1,39 @@
 import Head from 'next/head'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { Status } from '../@types'
+import { Status, State, Summary } from '../@types'
 import styles from '../styles/Home.module.css'
-import { getData } from '../utils/getData'
+import { getData, getSummary } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
-  const [statuses, setStatuses] = useState<Status[]>()
-  const [network, setNetwork] = useState<number>(1)
+  const [network, setNetwork] = useState<number>(0)
+  const [data, setData] = useState<Summary[]>([
+    {
+      component: 'Loading',
+      status: State.Up
+    }
+  ])
+
+  function style(state: State) {
+    console.log('state', state)
+    if (state === State.Down) {
+      return styles.down
+    } else if (state === State.Warning) {
+      return styles.warning
+    } else {
+      return styles.up
+    }
+  }
 
   useEffect(() => {
     async function getStatuses() {
-      const data = await getData()
-      data && setStatuses(data)
-      // console.log('statuses', statuses)
-      // console.log('statuses?[1].aquarius.status', statuses[1].aquarius.status)
+      const summary = await getSummary(network)
+      console.log('summary', summary)
+      if (summary) setData(summary)
     }
     getStatuses()
-  }, [])
+  }, [network])
+
+  console.log('data', data)
 
   return (
     <div className={styles.container}>
@@ -31,48 +48,14 @@ export default function HomePage(): ReactElement {
           Current Status of Ocean Components{' '}
         </p>
         <div className={styles.grid}>
-          {statuses && (
+          {data && (
             <>
-              <div className={styles.card}>
-                <h2>Aquarius</h2>
-                <p>{statuses[network].aquarius.status}</p>
-              </div>
-              <div className={styles.card}>
-                <h2>Provider</h2>
-                <p>{statuses[network].provider.status}</p>
-              </div>
-
-              <div className={styles.card}>
-                <h2>Subgraph</h2>
-                <p>{statuses[network].subgraph.status}</p>
-              </div>
-
-              <div className={styles.card}>
-                <h2>Market</h2>
-                <p>{statuses[network].market}</p>
-              </div>
-              <div className={styles.card}>
-                <h2>Port</h2>
-                <p>{statuses[network].port}</p>
-              </div>
-              <div className={styles.card}>
-                <h2>Data Farming</h2>
-                <p>{statuses[network].dataFarming}</p>
-              </div>
-              <div className={styles.card}>
-                <h2>Operator Service</h2>
-                <p>{statuses[network].operator.status}</p>
-              </div>
-              {statuses[network].faucet.status && (
-                <div className={styles.card}>
-                  <h2>Faucet</h2>
-                  <p>{statuses[network].faucet.status}</p>
+              {data.map((value: Summary) => (
+                <div className={`${styles.card} ${style(value.status)}`}>
+                  <h2>{value?.component}</h2>
+                  <p>{value?.status}</p>
                 </div>
-              )}
-              <div className={styles.card}>
-                <h2>DAO Grants</h2>
-                <p>{statuses[network].daoGrants}</p>
-              </div>
+              ))}
             </>
           )}
         </div>
@@ -82,3 +65,47 @@ export default function HomePage(): ReactElement {
     </div>
   )
 }
+
+// <>
+//   <div className={`${styles.card} ${style(data[0].status)}`}>
+//     <h2>{data[0].component}</h2>
+//     <p>{data[0].status}</p>
+//   </div>
+//   <div className={styles.card}>
+//     <h2>Provider</h2>
+//     <p>{statuses[network].provider.status}</p>
+//   </div>
+
+//   <div className={styles.card}>
+//     <h2>Subgraph</h2>
+//     <p>{statuses[network].subgraph.status}</p>
+//   </div>
+
+//   <div className={styles.card}>
+//     <h2>Market</h2>
+//     <p>{statuses[network].market}</p>
+//   </div>
+//   <div className={styles.card}>
+//     <h2>Port</h2>
+//     <p>{statuses[network].port}</p>
+//   </div>
+//   <div className={styles.card}>
+//     <h2>Data Farming</h2>
+//     <p>{statuses[network].dataFarming}</p>
+//   </div>
+//   <div className={styles.card}>
+//     <h2>Operator Service</h2>
+//     <p>{statuses[network].operator.status}</p>
+//   </div>
+//   {statuses[network].faucet.status && (
+//     <div className={styles.card}>
+//       <h2>Faucet</h2>
+//       <p>{statuses[network].faucet.status}</p>
+//     </div>
+//   )}
+//   <div className={styles.card}>
+//     <h2>DAO Grants</h2>
+//     <p>{statuses[network].daoGrants}</p>
+//   </div>
+// </>
+// }

@@ -1,18 +1,56 @@
 import axios, { AxiosResponse } from 'axios'
-import { Status } from '../@types'
+import { Status, Summary } from '../@types'
 import { statusServiceUri } from '../app.config'
 
-export async function getData(): Promise<Status[] | void> {
+export async function getData(): Promise<Status[]> {
   try {
     const response: AxiosResponse<Status[]> = await axios.get(
       `${statusServiceUri}`
     )
-    if (!response || response.status !== 200 || !response.data) return
+    if (!response || response.status !== 200 || !response.data)
+      console.log('ERROR: no data recieved')
 
     const data = { ...response.data }
     console.log('data', data)
+
     return data
   } catch (error) {
     console.log(error)
   }
 }
+
+export async function getSummary(network: number): Promise<Summary[]> {
+  try {
+    const data = await getData()
+    console.log('data', data)
+
+    const summary: Summary[] = [
+      { component: 'Aquarius', status: data[network].aquarius.status },
+      { component: 'Provider', status: data[network].provider.status },
+      { component: 'Subgraph', status: data[network].subgraph.status },
+      { component: 'Market', status: data[network].market },
+      { component: 'Port', status: data[network].port },
+      {
+        component: 'Data Farming',
+        status: data[network].dataFarming
+      },
+      {
+        component: 'Operator Service',
+        status: data[network].operator.status
+      },
+      {
+        component: 'DAO Grants',
+        status: data[network].daoGrants
+      }
+    ]
+
+    return summary
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// data[network].faucet.status && {
+//   component: 'Faucet',
+//   status: data[network].faucet.status
+// }
