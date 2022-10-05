@@ -30,8 +30,9 @@ export interface ProviderStatus {
 export interface AquariusStatus {
   status?: State
   response?: number
-  chain?: boolean
+  validChainList?: boolean
   version?: string
+  monitorVersion?: string
   latestRelease?: string
   block?: number
   validQuery?: boolean
@@ -77,6 +78,7 @@ export interface dbRow {
   aquariusResponse: number
   aquariusChain: number
   aquariusVersion: string
+  aquariusMonitorVersion: string
   aquariusLatestRelease: string
   aquariusBlock: number
   aquariusValidQuery: number

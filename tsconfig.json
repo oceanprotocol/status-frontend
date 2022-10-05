@@ -51,4 +51,3 @@
   "exclude": ["node_modules", ".next", "*.js"],
   "include": ["./src/**/*", "./tests/**/*", "./next-env.d.ts", "./content/**/*"]
 }
-
