@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { Status, Summary } from '../@types'
-import { statusServiceUri } from '../app.config'
+import { statusServiceUri } from '../../app.config'
 
 export async function getData(): Promise<Status[]> {
   try {

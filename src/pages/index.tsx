@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { Status, State, Summary } from '../@types'
+import { State, Summary } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData, getSummary } from '../utils/getData'
 
@@ -65,47 +65,3 @@ export default function HomePage(): ReactElement {
     </div>
   )
 }
-
-// <>
-//   <div className={`${styles.card} ${style(data[0].status)}`}>
-//     <h2>{data[0].component}</h2>
-//     <p>{data[0].status}</p>
-//   </div>
-//   <div className={styles.card}>
-//     <h2>Provider</h2>
-//     <p>{statuses[network].provider.status}</p>
-//   </div>
-
-//   <div className={styles.card}>
-//     <h2>Subgraph</h2>
-//     <p>{statuses[network].subgraph.status}</p>
-//   </div>
-
-//   <div className={styles.card}>
-//     <h2>Market</h2>
-//     <p>{statuses[network].market}</p>
-//   </div>
-//   <div className={styles.card}>
-//     <h2>Port</h2>
-//     <p>{statuses[network].port}</p>
-//   </div>
-//   <div className={styles.card}>
-//     <h2>Data Farming</h2>
-//     <p>{statuses[network].dataFarming}</p>
-//   </div>
-//   <div className={styles.card}>
-//     <h2>Operator Service</h2>
-//     <p>{statuses[network].operator.status}</p>
-//   </div>
-//   {statuses[network].faucet.status && (
-//     <div className={styles.card}>
-//       <h2>Faucet</h2>
-//       <p>{statuses[network].faucet.status}</p>
-//     </div>
-//   )}
-//   <div className={styles.card}>
-//     <h2>DAO Grants</h2>
-//     <p>{statuses[network].daoGrants}</p>
-//   </div>
-// </>
-// }

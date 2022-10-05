@@ -71,7 +71,7 @@ export interface Network {
   oceanAddress?: string
 }
 
-export interface Data {
+export interface Summary {
   component: string
   status: State
 }
