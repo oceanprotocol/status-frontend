@@ -6,12 +6,7 @@ import { getData, getSummary } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
   const [network, setNetwork] = useState<number>(0)
-  const [data, setData] = useState<Summary[]>([
-    {
-      component: 'Loading',
-      status: State.Up
-    }
-  ])
+  const [data, setData] = useState<Summary[]>()
 
   function style(state: State) {
     console.log('state', state)
