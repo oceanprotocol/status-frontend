@@ -46,7 +46,10 @@ export default function HomePage(): ReactElement {
           {data && (
             <>
               {data.map((value: Summary) => (
-                <div className={`${styles.card} ${style(value.status)}`}>
+                <div
+                  key={value.component}
+                  className={`${styles.card} ${style(value.status)}`}
+                >
                   <h2>{value?.component}</h2>
                   <p>{value?.status}</p>
                 </div>
