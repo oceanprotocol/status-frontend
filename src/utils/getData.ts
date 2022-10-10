@@ -11,6 +11,7 @@ export async function getData(): Promise<Status[]> {
 
     const data = [...response.data]
     console.log('1. data length', data.length)
+    console.log('1. data ', data)
 
     return data
   } catch (error) {

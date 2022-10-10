@@ -105,6 +105,11 @@
   font-weight: 600;
   transition: 0.2s ease-out;
 }
+.networkSelected {
+  color: #fcfcfc;
+  background: #41474e;
+  border-color: #fcfcfc;
+}
 .up {
   border: 2px solid #5fb359;
 }

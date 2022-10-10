@@ -5,12 +5,12 @@ import styles from '../styles/Home.module.css'
 import { getData, getSummary, getNetworks } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
-  const [network, setNetwork] = useState<number>(3)
+  const [network, setNetwork] = useState<number>(1)
   const [networks, setNetworks] = useState<string[]>()
   const [statuses, setStatuses] = useState<Status[]>()
   const [summary, setSummary] = useState<Summary[]>()
 
-  function style(state: State) {
+  function statusStyle(state: State) {
     console.log('state', state)
     if (state === State.Down) {
       return styles.down
@@ -19,6 +19,12 @@ export default function HomePage(): ReactElement {
     } else {
       return styles.up
     }
+  }
+
+  function networkStyle(networkIndex: number) {
+    if (networkIndex === network) {
+      return styles.networkSelected
+    } else return
   }
 
   useEffect(() => {
@@ -55,8 +61,11 @@ export default function HomePage(): ReactElement {
         <div className={styles.grid}>
           {networks && (
             <>
-              {networks.map((value: string) => (
-                <div key={value} className={`${styles.network}`}>
+              {networks.map((value: string, index: number) => (
+                <div
+                  key={value}
+                  className={`${styles.network} ${networkStyle(index)}`}
+                >
                   {value}
                 </div>
               ))}
@@ -69,7 +78,7 @@ export default function HomePage(): ReactElement {
               {summary.map((value: Summary) => (
                 <div
                   key={value.component}
-                  className={`${styles.card} ${style(value.status)}`}
+                  className={`${styles.card} ${statusStyle(value.status)}`}
                 >
                   <h2>{value?.component}</h2>
                   <p>{value?.status}</p>
