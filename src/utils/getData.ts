@@ -20,10 +20,9 @@ export async function getData(): Promise<Status[]> {
 }
 
 export function getSummary(network: number, data: Status[]): Summary[] {
+  console.log('2. data', data)
   try {
     if (data) {
-      console.log('2. data', data)
-
       const summary: Summary[] = [
         { component: 'Aquarius', status: data[network].aquarius.status },
         { component: 'Provider', status: data[network].provider.status },
@@ -57,12 +56,17 @@ export function getSummary(network: number, data: Status[]): Summary[] {
 }
 
 export function getNetworks(data: Status[]): string[] {
-  if (data) {
-    const networks: string[] = []
-    for (let i = 0; i < data.length; i++) {
-      console.log(i, 'data', data[i].network)
-      networks.push(data[i].network)
+  console.log('3. data', data)
+  try {
+    if (data) {
+      const networks: string[] = []
+      for (let i = 0; i < data.length; i++) {
+        console.log(i, 'data', data[i].network)
+        networks.push(data[i].network)
+      }
+      return networks
     }
-    return networks
+  } catch (error) {
+    console.log(error)
   }
 }

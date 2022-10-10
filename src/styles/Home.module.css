@@ -4,11 +4,10 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-family: 'Sharp Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Helvetica, Arial, sans-serif;
@@ -53,7 +52,6 @@
 }
 
 .description {
-  margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -88,13 +86,11 @@
 }
 .network {
   display: inline-block;
-  border: 1px solid #e2e2e2;
+  border: 1px solid;
   border-radius: 0.2rem;
   margin-right: calc(2rem / 6);
   margin-bottom: calc(2rem / 6);
-  color: #8b98a9;
-  background: #fff;
-  padding: calc(2rem / 6) !important;
+  padding: calc(2rem / 6);
   box-shadow: none;
   cursor: pointer;
   width: fit-content;
@@ -104,6 +100,14 @@
   font-size: 0.85rem;
   font-weight: 600;
   transition: 0.2s ease-out;
+}
+.networkUnselected {
+  color: #8b98a9;
+  background: #fff;
+  border-color: #e2e2e2;
+}
+.networkUnselected:hover {
+  color: #41474e;
 }
 .networkSelected {
   color: #fcfcfc;
@@ -120,13 +124,6 @@
 
 .down {
   border: 2px solid #d80606;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
 }
 
 .card h2 {

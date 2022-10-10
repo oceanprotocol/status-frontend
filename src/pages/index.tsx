@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { FormEvent, ReactElement, useEffect, useState } from 'react'
 import { Status, State, Summary } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData, getSummary, getNetworks } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
-  const [network, setNetwork] = useState<number>(1)
+  const [network, setNetwork] = useState<number>(0)
   const [networks, setNetworks] = useState<string[]>()
   const [statuses, setStatuses] = useState<Status[]>()
   const [summary, setSummary] = useState<Summary[]>()
@@ -24,13 +24,15 @@ export default function HomePage(): ReactElement {
   function networkStyle(networkIndex: number) {
     if (networkIndex === network) {
       return styles.networkSelected
-    } else return
+    } else return styles.networkUnselected
   }
 
   useEffect(() => {
     async function getStatuses() {
       const statusData = await getData()
+      console.log('statusData', statusData)
       if (statusData) setStatuses(statusData)
+      console.log('statuses', statuses)
 
       const summaryData = getSummary(network, statuses)
       console.log('summaryData', summaryData)
@@ -61,13 +63,14 @@ export default function HomePage(): ReactElement {
         <div className={styles.grid}>
           {networks && (
             <>
-              {networks.map((value: string, index: number) => (
-                <div
-                  key={value}
-                  className={`${styles.network} ${networkStyle(index)}`}
+              {networks.map((value: string, i: number) => (
+                <button
+                  key={i}
+                  className={`${styles.network} ${networkStyle(i)}`}
+                  onClick={() => setNetwork(i)}
                 >
                   {value}
-                </div>
+                </button>
               ))}
             </>
           )}
