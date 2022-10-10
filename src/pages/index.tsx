@@ -56,8 +56,8 @@ export default function HomePage(): ReactElement {
           {networks && (
             <>
               {networks.map((value: string) => (
-                <div key={value} className={`${styles.card}`}>
-                  <h2>{value}</h2>
+                <div key={value} className={`${styles.network}`}>
+                  {value}
                 </div>
               ))}
             </>
