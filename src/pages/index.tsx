@@ -1,14 +1,15 @@
 import Head from 'next/head'
-import React, { FormEvent, ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { Status, State, Summary } from '../@types'
 import styles from '../styles/Home.module.css'
-import { getData, getSummary, getNetworks } from '../utils/getData'
+import { getData, getSummary } from '../utils/getData'
+import { availableNetworks } from '../../app.config'
 
 export default function HomePage(): ReactElement {
-  const [network, setNetwork] = useState<number>(0)
-  const [networks, setNetworks] = useState<string[]>()
+  const [network, setNetwork] = useState<string>('mainnet')
   const [statuses, setStatuses] = useState<Status[]>()
   const [summary, setSummary] = useState<Summary[]>()
+  const networks = JSON.parse(availableNetworks)
 
   function statusStyle(state: State) {
     console.log('state', state)
@@ -21,8 +22,8 @@ export default function HomePage(): ReactElement {
     }
   }
 
-  function networkStyle(networkIndex: number) {
-    if (networkIndex === network) {
+  function networkStyle(currentNet: string) {
+    if (currentNet === network) {
       return styles.networkSelected
     } else return styles.networkUnselected
   }
@@ -37,10 +38,6 @@ export default function HomePage(): ReactElement {
       const summaryData = getSummary(network, statuses)
       console.log('summaryData', summaryData)
       if (summaryData) setSummary(summaryData)
-
-      const networksData = getNetworks(statuses)
-      console.log('networksData', networksData)
-      if (networksData) setNetworks(networksData)
     }
     getStatuses()
   }, [network])
@@ -66,8 +63,8 @@ export default function HomePage(): ReactElement {
               {networks.map((value: string, i: number) => (
                 <button
                   key={i}
-                  className={`${styles.network} ${networkStyle(i)}`}
-                  onClick={() => setNetwork(i)}
+                  className={`${styles.network} ${networkStyle(value)}`}
+                  onClick={() => setNetwork(value)}
                 >
                   {value}
                 </button>

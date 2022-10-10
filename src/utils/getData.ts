@@ -19,52 +19,40 @@ export async function getData(): Promise<Status[]> {
   }
 }
 
-export function getSummary(network: number, data: Status[]): Summary[] {
+export function getSummary(network: string, data: Status[]): Summary[] {
   console.log('2. data', data)
   try {
     if (data) {
+      let status: Status
+      data.forEach((element) => {
+        if (element.network === network) return (status = element)
+      })
       const summary: Summary[] = [
-        { component: 'Aquarius', status: data[network].aquarius.status },
-        { component: 'Provider', status: data[network].provider.status },
-        { component: 'Subgraph', status: data[network].subgraph.status },
-        { component: 'Market', status: data[network].market },
-        { component: 'Port', status: data[network].port },
+        { component: 'Aquarius', status: status.aquarius.status },
+        { component: 'Provider', status: status.provider.status },
+        { component: 'Subgraph', status: status.subgraph.status },
+        { component: 'Market', status: status.market },
+        { component: 'Port', status: status.port },
         {
           component: 'Data Farming',
-          status: data[network].dataFarming
+          status: status.dataFarming
         },
         {
           component: 'Operator Service',
-          status: data[network].operator.status
+          status: status.operator.status
         },
         {
           component: 'DAO Grants',
-          status: data[network].daoGrants
+          status: status.daoGrants
         }
       ]
-      data[network].faucet.status &&
+      status.faucet.status &&
         summary.push({
           component: 'Faucet',
-          status: data[network].faucet.status
+          status: status.faucet.status
         })
 
       return summary
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export function getNetworks(data: Status[]): string[] {
-  console.log('3. data', data)
-  try {
-    if (data) {
-      const networks: string[] = []
-      for (let i = 0; i < data.length; i++) {
-        console.log(i, 'data', data[i].network)
-        networks.push(data[i].network)
-      }
-      return networks
     }
   } catch (error) {
     console.log(error)
