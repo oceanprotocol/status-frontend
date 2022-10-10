@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { State, Summary } from '../@types'
+import { Status, State, Summary } from '../@types'
 import styles from '../styles/Home.module.css'
-import { getData, getSummary } from '../utils/getData'
+import { getData, getSummary, getNetworks } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
-  const [network, setNetwork] = useState<number>(0)
-  const [data, setData] = useState<Summary[]>()
+  const [network, setNetwork] = useState<number>(3)
+  const [networks, setNetworks] = useState<string[]>()
+  const [statuses, setStatuses] = useState<Status[]>()
+  const [summary, setSummary] = useState<Summary[]>()
 
   function style(state: State) {
     console.log('state', state)
@@ -21,14 +23,22 @@ export default function HomePage(): ReactElement {
 
   useEffect(() => {
     async function getStatuses() {
-      const summary = await getSummary(network)
-      console.log('summary', summary)
-      if (summary) setData(summary)
+      const statusData = await getData()
+      if (statusData) setStatuses(statusData)
+
+      const summaryData = getSummary(network, statuses)
+      console.log('summaryData', summaryData)
+      if (summaryData) setSummary(summaryData)
+
+      const networksData = getNetworks(statuses)
+      console.log('networksData', networksData)
+      if (networksData) setNetworks(networksData)
     }
     getStatuses()
   }, [network])
 
-  console.log('data', data)
+  console.log('summary', summary)
+  console.log('~ networks', networks)
 
   return (
     <div className={styles.container}>
@@ -43,9 +53,20 @@ export default function HomePage(): ReactElement {
           Current Status of Ocean Components{' '}
         </p>
         <div className={styles.grid}>
-          {data && (
+          {networks && (
             <>
-              {data.map((value: Summary) => (
+              {networks.map((value: string) => (
+                <div key={value} className={`${styles.card}`}>
+                  <h2>{value}</h2>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+        <div className={styles.grid}>
+          {summary && (
+            <>
+              {summary.map((value: Summary) => (
                 <div
                   key={value.component}
                   className={`${styles.card} ${style(value.status)}`}
