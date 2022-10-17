@@ -3,6 +3,8 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { Status, State, Summary, NetworkSummary } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
+import Logo from '../images/logo.svg'
+import Image from 'next/image'
 
 export default function HomePage(): ReactElement {
   const [network, setNetwork] = useState<string>('mainnet')
@@ -54,6 +56,8 @@ export default function HomePage(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Image src={Logo} height="80rem" />
+        {/* <img src={require('../images/logo.svg')} alt="Ocean Protocol Logo" /> */}
         <h1 className={styles.title}>Ocean Status</h1>
         <p className={styles.description}>
           Current Status of Ocean Components{' '}
