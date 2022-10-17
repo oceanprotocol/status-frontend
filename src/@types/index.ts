@@ -75,3 +75,8 @@ export interface Summary {
   component: string
   status: State
 }
+
+export interface NetworkSummary {
+  name: string
+  status: State
+}
