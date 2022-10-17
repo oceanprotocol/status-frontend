@@ -6,17 +6,16 @@ import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
   const [network, setNetwork] = useState<string>('mainnet')
-  const [statuses, setStatuses] = useState<Status[]>()
   const [summary, setSummary] = useState<Summary[]>()
   const [networks, setNetworks] = useState<NetworkSummary[]>()
 
   function statusIcon(state: State): string {
     if (state === State.Up) {
       return '✅'
-    } else if (state === State.Warning) {
-      return '🚧'
     } else if (state === State.Down) {
       return '🚨'
+    } else {
+      return '🚧'
     }
   }
 
@@ -39,7 +38,6 @@ export default function HomePage(): ReactElement {
   useEffect(() => {
     async function getStatuses() {
       const statusData = await getData()
-      if (statusData) setStatuses(statusData)
       const summaryData = getSummary(network, statusData)
       if (summaryData) setSummary(summaryData)
       const networkSummary = getNetworkSUmmary(statusData)
