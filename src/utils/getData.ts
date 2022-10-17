@@ -1,17 +1,15 @@
 import axios, { AxiosResponse } from 'axios'
-import { Status, Summary } from '../@types'
+import { NetworkSummary, State, Status, Summary } from '../@types'
 import { statusApiUri } from '../../app.config'
+import { availableNetworks } from '../../app.config'
 
 export async function getData(): Promise<Status[]> {
   try {
-    console.log(`${statusApiUri}`)
     const response: AxiosResponse<Status[]> = await axios.get(`${statusApiUri}`)
     if (!response || response.status !== 200 || !response.data)
       console.log('ERROR: no data recieved')
 
     const data = response.data
-    console.log('1. data length', data.length)
-    console.log('1. data ', data)
 
     return data
   } catch (error) {
@@ -20,14 +18,13 @@ export async function getData(): Promise<Status[]> {
 }
 
 export function getSummary(network: string, data: Status[]): Summary[] {
-  console.log('2. data', network, data)
   try {
     if (data) {
       let status: Status
       data.forEach((element) => {
         if (element.network === network) return (status = element)
       })
-      console.log('network status: ', status)
+
       const summary: Summary[] = [
         { component: 'Aquarius', status: status?.aquarius?.status },
         { component: 'Provider', status: status?.provider?.status },
@@ -58,4 +55,23 @@ export function getSummary(network: string, data: Status[]): Summary[] {
   } catch (error) {
     console.log(error)
   }
+}
+
+export function getNetworkSUmmary(data: Status[]): NetworkSummary[] {
+  const networks: string[] = JSON.parse(availableNetworks)
+  const networkSummary: NetworkSummary[] = []
+  networks.forEach((network) => {
+    const summary = getSummary(network, data)
+    let status = State.Up
+    summary.forEach((service) => {
+      if (service.status === State.Down) return (status = State.Down)
+    })
+    if (status === State.Up) {
+      summary.forEach((service) => {
+        if (service.status === State.Warning) return (status = State.Warning)
+      })
+    }
+    networkSummary.push({ name: network, status })
+  })
+  return networkSummary
 }

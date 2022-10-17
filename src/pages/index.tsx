@@ -1,18 +1,26 @@
 import Head from 'next/head'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { Status, State, Summary } from '../@types'
+import { Status, State, Summary, NetworkSummary } from '../@types'
 import styles from '../styles/Home.module.css'
-import { getData, getSummary } from '../utils/getData'
-import { availableNetworks } from '../../app.config'
+import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
 
 export default function HomePage(): ReactElement {
   const [network, setNetwork] = useState<string>('mainnet')
   const [statuses, setStatuses] = useState<Status[]>()
   const [summary, setSummary] = useState<Summary[]>()
-  const networks = JSON.parse(availableNetworks)
+  const [networks, setNetworks] = useState<NetworkSummary[]>()
+
+  function statusIcon(state: State): string {
+    if (state === State.Up) {
+      return '✅'
+    } else if (state === State.Warning) {
+      return '🚧'
+    } else if (state === State.Down) {
+      return '🚨'
+    }
+  }
 
   function statusStyle(state: State) {
-    console.log('state', state)
     if (state === State.Down) {
       return styles.down
     } else if (state === State.Warning) {
@@ -34,12 +42,11 @@ export default function HomePage(): ReactElement {
       if (statusData) setStatuses(statusData)
       const summaryData = getSummary(network, statusData)
       if (summaryData) setSummary(summaryData)
+      const networkSummary = getNetworkSUmmary(statusData)
+      if (networkSummary) setNetworks(networkSummary)
     }
     getStatuses()
   }, [network])
-
-  console.log('summary', summary)
-  console.log('~ networks', networks)
 
   return (
     <div className={styles.container}>
@@ -56,13 +63,15 @@ export default function HomePage(): ReactElement {
         <div className={styles.grid}>
           {networks && (
             <>
-              {networks.map((value: string, i: number) => (
+              {networks.map((network: NetworkSummary, i: number) => (
                 <button
                   key={i}
-                  className={`${styles.network} ${networkStyle(value)}`}
-                  onClick={() => setNetwork(value)}
+                  className={`${styles.network} ${networkStyle(network.name)}`}
+                  onClick={() => setNetwork(network.name)}
                 >
-                  {value}
+                  <span>
+                    {network.name} {statusIcon(network.status)}
+                  </span>
                 </button>
               ))}
             </>
