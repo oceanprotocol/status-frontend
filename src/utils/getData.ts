@@ -9,7 +9,7 @@ export async function getData(): Promise<Status[]> {
     if (!response || response.status !== 200 || !response.data)
       console.log('ERROR: no data recieved')
 
-    const data = [...response.data]
+    const data = response.data
     console.log('1. data length', data.length)
     console.log('1. data ', data)
 
@@ -20,33 +20,34 @@ export async function getData(): Promise<Status[]> {
 }
 
 export function getSummary(network: string, data: Status[]): Summary[] {
-  console.log('2. data', data)
+  console.log('2. data', network, data)
   try {
     if (data) {
       let status: Status
       data.forEach((element) => {
         if (element.network === network) return (status = element)
       })
+      console.log('network status: ', status)
       const summary: Summary[] = [
-        { component: 'Aquarius', status: status.aquarius.status },
-        { component: 'Provider', status: status.provider.status },
-        { component: 'Subgraph', status: status.subgraph.status },
-        { component: 'Market', status: status.market },
-        { component: 'Port', status: status.port },
+        { component: 'Aquarius', status: status?.aquarius?.status },
+        { component: 'Provider', status: status?.provider?.status },
+        { component: 'Subgraph', status: status?.subgraph?.status },
+        { component: 'Market', status: status?.market },
+        { component: 'Port', status: status?.port },
         {
           component: 'Data Farming',
-          status: status.dataFarming
+          status: status?.dataFarming
         },
         {
           component: 'Operator Service',
-          status: status.operator.status
+          status: status?.operator?.status
         },
         {
           component: 'DAO Grants',
-          status: status.daoGrants
+          status: status?.daoGrants
         }
       ]
-      status.faucet.status &&
+      status?.faucet?.status &&
         summary.push({
           component: 'Faucet',
           status: status.faucet.status

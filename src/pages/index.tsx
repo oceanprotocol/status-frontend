@@ -31,12 +31,8 @@ export default function HomePage(): ReactElement {
   useEffect(() => {
     async function getStatuses() {
       const statusData = await getData()
-      console.log('statusData', statusData)
       if (statusData) setStatuses(statusData)
-      console.log('statuses', statuses)
-
-      const summaryData = getSummary(network, statuses)
-      console.log('summaryData', summaryData)
+      const summaryData = getSummary(network, statusData)
       if (summaryData) setSummary(summaryData)
     }
     getStatuses()
