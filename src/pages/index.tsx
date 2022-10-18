@@ -41,8 +41,10 @@ export default function HomePage(): ReactElement {
     async function getStatuses() {
       const statusData = await getData()
       const summaryData = getSummary(network, statusData)
+      console.log('summaryData', summaryData)
       if (summaryData) setSummary(summaryData)
       const networkSummary = getNetworkSUmmary(statusData)
+      console.log('networkSummary', networkSummary)
       if (networkSummary) setNetworks(networkSummary)
     }
     getStatuses()
