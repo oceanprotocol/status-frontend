@@ -4,15 +4,15 @@ import { Status, State, Summary, NetworkSummary } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
-import Image from 'next/image'
+import CheckAsset from '../images/check.svg'
 
-function statusIcon(state: State): string {
+function statusIcon(state: State): ReactElement {
   if (state === State.Up) {
-    return '✅'
+    return <CheckAsset className={styles.check} />
   } else if (state === State.Down) {
-    return '🚨'
+    return <>🚨</>
   } else {
-    return '🚧'
+    return <>🚧</>
   }
 }
 

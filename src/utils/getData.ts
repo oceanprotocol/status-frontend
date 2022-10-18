@@ -51,10 +51,6 @@ export function getSummary(network: string, data: Status[][]): Summary[] {
           status: status?.market
         },
         {
-          component: 'Port',
-          status: status?.port
-        },
-        {
           component: 'Data Farming',
           status: status?.dataFarming
         },
@@ -62,10 +58,6 @@ export function getSummary(network: string, data: Status[][]): Summary[] {
           component: 'Operator Service',
           status: status?.operator?.status,
           version: status?.operator?.version
-        },
-        {
-          component: 'DAO Grants',
-          status: status?.daoGrants
         }
       ]
       status?.faucet?.status &&
