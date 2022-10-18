@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { Fragment, ReactElement, useEffect, useState } from 'react'
-import { Status, State, Summary, NetworkSummary } from '../@types'
+import { State, Summary, NetworkSummary } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
@@ -27,20 +27,19 @@ function statusStyle(state: State) {
 }
 
 export default function HomePage(): ReactElement {
-  const [network, setNetwork] = useState('mainnet')
   const [summary, setSummary] = useState<Summary[]>()
   const [networks, setNetworks] = useState<NetworkSummary[]>()
 
   useEffect(() => {
     async function getStatuses() {
       const statusData = await getData()
-      const summaryData = getSummary(network, statusData)
+      const summaryData = getSummary('mainnet', statusData)
       if (summaryData) setSummary(summaryData)
       const networkSummary = getNetworkSUmmary(statusData)
       if (networkSummary) setNetworks(networkSummary)
     }
     getStatuses()
-  }, [network])
+  }, [])
 
   return (
     <div className={styles.container}>

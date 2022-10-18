@@ -1,10 +1,12 @@
 import { BigNumber } from 'ethers'
 
+/* eslint-disable no-unused-vars */
 export enum State {
   Up = 'UP',
   Down = 'DOWN',
   Warning = 'WARNING'
 }
+/* eslint-enable no-unused-vars */
 
 export interface Status {
   network: string
