@@ -70,8 +70,10 @@ export default function HomePage(): ReactElement {
                   key={value.component}
                   className={`${styles.card} ${statusStyle(value.status)}`}
                 >
-                  <h2>{value?.component}</h2>
-                  <p>{value?.status}</p>
+                  <h2>
+                    {statusIcon(value.status)} {value.component}
+                  </h2>
+                  <code className={styles.version}>{value.version}</code>
                 </div>
               ))}
             </div>

@@ -74,6 +74,7 @@ export interface Network {
 export interface Summary {
   component: string
   status: State
+  version?: string
 }
 
 export interface NetworkSummary {

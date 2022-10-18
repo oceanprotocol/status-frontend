@@ -28,19 +28,40 @@ export function getSummary(network: string, data: Status[][]): Summary[] {
         if (element[0].network === network) return (status = element[0])
       })
 
+      // TODO: this is not fun. Needs a smart iteration over response instead of
+      // aall this hardcoding
       const summary: Summary[] = [
-        { component: 'Aquarius', status: status?.aquarius?.status },
-        { component: 'Provider', status: status?.provider?.status },
-        { component: 'Subgraph', status: status?.subgraph?.status },
-        { component: 'Market', status: status?.market },
-        { component: 'Port', status: status?.port },
+        {
+          component: 'Aquarius',
+          status: status?.aquarius?.status,
+          version: status?.aquarius?.version
+        },
+        {
+          component: 'Provider',
+          status: status?.provider?.status,
+          version: status?.provider?.version
+        },
+        {
+          component: 'Subgraph',
+          status: status?.subgraph?.status,
+          version: status?.subgraph?.version
+        },
+        {
+          component: 'Market',
+          status: status?.market
+        },
+        {
+          component: 'Port',
+          status: status?.port
+        },
         {
           component: 'Data Farming',
           status: status?.dataFarming
         },
         {
           component: 'Operator Service',
-          status: status?.operator?.status
+          status: status?.operator?.status,
+          version: status?.operator?.version
         },
         {
           component: 'DAO Grants',
@@ -63,6 +84,7 @@ export function getSummary(network: string, data: Status[][]): Summary[] {
 export function getNetworkSUmmary(data: Status[][]): NetworkSummary[] {
   const networks: string[] = JSON.parse(availableNetworks)
   const networkSummary: NetworkSummary[] = []
+
   networks.forEach((network) => {
     const summary = getSummary(network, data)
     let status = State.Up
