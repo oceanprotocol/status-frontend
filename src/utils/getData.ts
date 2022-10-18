@@ -10,7 +10,7 @@ export async function getData(): Promise<{ [key: string]: Status }> {
 
     // transform data into object with network names as keys
     const output = Object.fromEntries(
-      response.data.map((item) => [item.network, item])
+      response.data?.map((item) => [item.network, item])
     )
     return output
   } catch (error) {

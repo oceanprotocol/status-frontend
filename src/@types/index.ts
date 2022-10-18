@@ -12,54 +12,46 @@ export interface Status {
   network: string
   currentBlock: number
   market: State
-  port: State
   faucet: FaucetStatus | Record<string, never>
   aquarius: AquariusStatus
   provider: ProviderStatus
   subgraph: SubgraphStatus
   operator: OperatorStatus
   dataFarming: State
-  daoGrants: State
   lastUpdatedOn: number
 }
 
-export interface ProviderStatus {
+export interface ComponentStatusBase {
   status: State
-  response?: number
-  version?: string
-  latestRelease?: string
+  statusMessages: string
+  response: number
+  version: string
 }
 
-export interface AquariusStatus {
-  status: State
-  response?: number
-  validChainList?: boolean
-  version?: string
-  monitorVersion?: string
-  latestRelease?: string
-  block?: number
-  validQuery?: boolean
-}
-export interface SubgraphStatus {
-  status: State
-  response?: number
-  version?: string
-  latestRelease?: string
-  block?: number
+export interface ProviderStatus extends ComponentStatusBase {
+  latestRelease: string
 }
 
-export interface OperatorStatus {
-  status: State
-  response?: number
-  version?: string
-  latestRelease?: string
-  environments?: number
-  limitReached?: boolean
+export interface AquariusStatus extends ComponentStatusBase {
+  validChainList: boolean
+  monitorVersion: string
+  latestRelease: string
+  block: number
+  validQuery: boolean
 }
 
-export interface FaucetStatus {
-  status: State
-  response?: number
+export interface SubgraphStatus extends ComponentStatusBase {
+  latestRelease: string
+  block: number
+}
+
+export interface OperatorStatus extends ComponentStatusBase {
+  latestRelease: string
+  environments: number
+  limitReached: boolean
+}
+
+export interface FaucetStatus extends ComponentStatusBase {
   ethBalance?: BigNumber
   ethBalanceSufficient?: boolean
   oceanBalance?: BigNumber

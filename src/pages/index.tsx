@@ -85,8 +85,20 @@ export default function HomePage(): ReactElement {
                           : value.status
                       )}{' '}
                       {key}
+                      <code className={styles.version}>{value.version}</code>
                     </h2>
-                    <code className={styles.version}>{value.version}</code>
+
+                    {value.statusMessages && value.statusMessages !== '' && (
+                      <ul className={styles.messages}>
+                        {value.statusMessages
+                          .split(',')
+                          .map((message: string, i: number) => (
+                            <li key={i} className={styles.statusMessage}>
+                              {message}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
                   </div>
                 ))}
             </div>
