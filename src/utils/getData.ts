@@ -12,6 +12,7 @@ export async function getData(): Promise<{ [key: string]: Status }> {
     const output = Object.fromEntries(
       response.data?.map((item) => [item.network, item])
     )
+    console.log('Got new data', output)
     return output
   } catch (error) {
     console.error(error.message)

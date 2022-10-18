@@ -8,11 +8,11 @@ import CheckAsset from '../images/check.svg'
 
 function statusIcon(state: State): ReactElement {
   if (state === State.Up) {
-    return <CheckAsset className={styles.check} />
+    return <CheckAsset className={`${styles.icon} ${styles.check}`} />
   } else if (state === State.Down) {
-    return <>🚨</>
+    return <span className={styles.icon}>🚨</span>
   } else {
-    return <>🚧</>
+    return <span className={styles.icon}>🚧</span>
   }
 }
 
@@ -85,7 +85,9 @@ export default function HomePage(): ReactElement {
                           : value.status
                       )}{' '}
                       {key}
-                      <code className={styles.version}>{value.version}</code>
+                      <code className={styles.version} title="deployed version">
+                        {value.version}
+                      </code>
                     </h2>
 
                     {value.statusMessages && value.statusMessages !== '' && (
