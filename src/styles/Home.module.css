@@ -1,19 +1,10 @@
 .container {
-  padding: 0 2rem;
+  padding: var(--spacer);
   margin: 0 auto;
-  max-width: 40rem;
-}
-
-.main {
-  min-height: 100vh;
-  padding: 2rem 0;
-  font-family: 'Sharp Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, Arial, sans-serif;
 }
 
 .footer {
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
@@ -30,83 +21,27 @@
 }
 
 .description {
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size: var(--font-size-large);
 }
 
 .grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--spacer);
+}
+
+.networkName {
+  margin-top: calc(var(--spacer) * 2);
+  text-transform: capitalize;
 }
 
 .card {
-  margin: 1rem;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-  min-width: 150px;
-}
-
-.network {
-  display: inline-block;
-  border: 1px solid;
-  border-radius: 0.2rem;
-  margin-right: calc(2rem / 6);
-  margin-bottom: calc(2rem / 6);
-  padding: calc(2rem / 6);
-  box-shadow: none;
-  cursor: pointer;
-  width: fit-content;
-  min-width: auto;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: 0.2s ease-out;
-}
-
-.networkUnselected {
-  color: #8b98a9;
-  background: #fff;
-  border-color: #e2e2e2;
-}
-
-.networkUnselected:hover {
-  color: #41474e;
-}
-
-.networkSelected {
-  color: #fcfcfc;
-  background: #41474e;
-  border-color: #fcfcfc;
-}
-
-.up {
-  border: 2px solid #5fb359;
-}
-
-.warning {
-  border: 2px solid #eac146;
-}
-
-.down {
-  border: 2px solid #d80606;
 }
 
 .card h2 {
@@ -122,14 +57,19 @@
 
 .logo {
   fill: var(--font-color-heading);
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
+.up {
+  border: 2px solid #5fb359;
+}
+
+.warning {
+  border: 2px solid #eac146;
+}
+
+.down {
+  border: 2px solid #d80606;
 }
