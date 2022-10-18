@@ -29,11 +29,14 @@ function statusStyle(state: State) {
 
 export default function HomePage(): ReactElement {
   const [data, setData] = useState<{ [key: string]: Status }>()
+  const [isLoading, setIsloading] = useState<boolean>()
 
   useEffect(() => {
     async function getStatuses() {
+      setIsloading(true)
       const data = await getData()
       setData(data)
+      setIsloading(false)
     }
     getStatuses()
   }, [])
@@ -60,84 +63,90 @@ export default function HomePage(): ReactElement {
       </header>
 
       <main>
-        {Object.entries(data || {}).map(([key, value]) => {
-          const networkKey = key
+        {isLoading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : (
+          Object.entries(data || {}).map(([key, value]) => {
+            const networkKey = key
 
-          return (
-            <Fragment key={networkKey}>
-              <h2 className={styles.networkName}>{networkKey}</h2>
-              <div className={styles.grid}>
-                {Object.entries(value)
-                  .filter(
-                    // TODO: Remove this filter if we fix this on API level
-                    // Needs a new `components` key under Status response
-                    ([key]) =>
-                      key !== 'currentBlock' &&
-                      key !== 'lastUpdatedOn' &&
-                      key !== 'network' &&
-                      key !== '_id' &&
-                      key !== '__v'
-                  )
-                  .map(([key, value]) => (
-                    <div
-                      key={key}
-                      className={`${styles.card} ${statusStyle(
-                        // TODO: all component states should be of type Status on API level
-                        key === 'market' || key === 'dataFarming'
-                          ? value
-                          : value.status
-                      )}`}
-                    >
-                      <h2 className={styles.titleComponent}>
-                        {statusIcon(
+            return (
+              <Fragment key={networkKey}>
+                <h2 className={styles.networkName}>{networkKey}</h2>
+                <div className={styles.grid}>
+                  {Object.entries(value)
+                    .filter(
+                      // TODO: Remove this filter if we fix this on API level
+                      // Needs a new `components` key under Status response
+                      ([key]) =>
+                        key !== 'currentBlock' &&
+                        key !== 'lastUpdatedOn' &&
+                        key !== 'network' &&
+                        key !== '_id' &&
+                        key !== '__v'
+                    )
+                    .map(([key, value]) => (
+                      <div
+                        key={key}
+                        className={`${styles.card} ${statusStyle(
+                          // TODO: all component states should be of type Status on API level
                           key === 'market' || key === 'dataFarming'
                             ? value
                             : value.status
-                        )}{' '}
-                        {key}
-                        <code
-                          className={styles.version}
-                          title="deployed version"
-                        >
-                          {value.version}
-                        </code>
-                      </h2>
+                        )}`}
+                      >
+                        <h2 className={styles.titleComponent}>
+                          {statusIcon(
+                            key === 'market' || key === 'dataFarming'
+                              ? value
+                              : value.status
+                          )}{' '}
+                          {key}
+                          <code
+                            className={styles.version}
+                            title="deployed version"
+                          >
+                            {value.version}
+                          </code>
+                        </h2>
 
-                      {value.statusMessages && value.statusMessages !== '' && (
-                        <ul className={styles.messages}>
-                          {value.statusMessages
-                            .split(',')
-                            .map((message: string, i: number) => (
-                              <li key={i} className={styles.statusMessage}>
-                                {message}
-                              </li>
-                            ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
-              </div>
+                        {value.statusMessages && value.statusMessages !== '' && (
+                          <ul className={styles.messages}>
+                            {value.statusMessages
+                              .split(',')
+                              .map((message: string, i: number) => (
+                                <li key={i} className={styles.statusMessage}>
+                                  {message}
+                                </li>
+                              ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                </div>
 
-              <details className={styles.contracts}>
-                <summary>
-                  <h3 className={styles.titleComponent}>Deployed Contracts</h3>
-                </summary>
-                <ul>
-                  {Object.entries((addresses as any)[networkKey]).map(
-                    ([key, value]) =>
-                      key !== 'chainId' &&
-                      key !== 'startBlock' && (
-                        <li key={key}>
-                          <code className={styles.key}>{key}</code>:{' '}
-                          <code>{JSON.stringify(value)}</code>
-                        </li>
-                      )
-                  )}
-                </ul>
-              </details>
-            </Fragment>
-          )
-        })}
+                <details className={styles.contracts}>
+                  <summary>
+                    <h3 className={styles.titleComponent}>
+                      Deployed Contracts
+                    </h3>
+                  </summary>
+                  <ul>
+                    {Object.entries((addresses as any)[networkKey]).map(
+                      ([key, value]) =>
+                        key !== 'chainId' &&
+                        key !== 'startBlock' && (
+                          <li key={key}>
+                            <code className={styles.key}>{key}</code>:{' '}
+                            <code>{JSON.stringify(value)}</code>
+                          </li>
+                        )
+                    )}
+                  </ul>
+                </details>
+              </Fragment>
+            )
+          })
+        )}
       </main>
 
       <footer className={styles.footer}></footer>

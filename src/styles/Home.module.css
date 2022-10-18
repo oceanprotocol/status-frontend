@@ -1,6 +1,8 @@
 .container {
   padding: var(--spacer);
   margin: 0 auto;
+  background: url('../../node_modules/@oceanprotocol/art/waves/waves.svg')
+    no-repeat center 13.5rem;
 }
 
 @media screen and (min-width: 50rem) {
@@ -36,7 +38,7 @@
 }
 
 .networkName {
-  margin-top: calc(var(--spacer) * 2);
+  margin-top: calc(var(--spacer) * 3);
   text-transform: capitalize;
 }
 
@@ -45,8 +47,10 @@
   text-align: left;
   color: inherit;
   text-decoration: none;
+  background: var(--background-content);
   border-radius: var(--border-radius);
-  border: 2px solid var(--border-color);
+  box-shadow: 0 6px 17px 0 var(--box-shadow-color);
+  border: 1px solid var(--border-color);
 }
 
 .titleComponent {
@@ -72,7 +76,7 @@
   fill: var(--font-color-heading);
   height: 4rem;
   width: 4rem;
-  margin: 0 auto;
+  margin: 0 auto calc(var(--spacer) / 2) auto;
 }
 
 .icon {
@@ -109,4 +113,9 @@
 
 .contracts .titleComponent {
   display: inline-block;
+}
+
+.loading {
+  margin-top: 30vh;
+  text-align: center;
 }

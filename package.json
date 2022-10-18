@@ -11,6 +11,7 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "@oceanprotocol/art": "^3.2.0",
     "@oceanprotocol/contracts": "^1.1.7",
     "@oceanprotocol/typographies": "^0.1.0",
     "@svgr/webpack": "^6.5.0",
