@@ -5,12 +5,6 @@ import { availableNetworks } from '../../app.config'
 
 export async function getData(): Promise<Status[][]> {
   try {
-    console.log(
-      'statusApiUri',
-      process.env,
-      process.env.NEXT_PUBLIC_STATUS_API_URI,
-      statusApiUri
-    )
     const response: AxiosResponse<Status[][]> = await axios.get(
       `${statusApiUri}`
     )
@@ -18,7 +12,6 @@ export async function getData(): Promise<Status[][]> {
       console.log('ERROR: no data recieved')
 
     const data = response.data
-    console.log('data', data)
 
     return data
   } catch (error) {
