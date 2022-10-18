@@ -14,8 +14,7 @@
 }
 
 .title {
-  margin: 0;
-  line-height: 1.15;
+  margin-bottom: calc(var(--spacer) / 4);
   font-size: 3rem;
 }
 
@@ -26,6 +25,8 @@
 
 .description {
   font-size: var(--font-size-large);
+  margin: 0 auto;
+  max-width: 50rem;
 }
 
 .grid {
@@ -48,8 +49,7 @@
   border: 2px solid var(--border-color);
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
+.titleComponent {
   font-size: var(--font-size-large);
   margin: 0;
 }
@@ -95,4 +95,18 @@
   margin-top: calc(var(--spacer) / 8);
   list-style-position: outside;
   color: var(--brand-alert-orange);
+}
+
+.contracts {
+  margin-top: var(--spacer);
+  margin-left: 1rem;
+}
+
+.contracts summary {
+  margin-left: -1rem;
+  cursor: pointer;
+}
+
+.contracts .titleComponent {
+  display: inline-block;
 }
