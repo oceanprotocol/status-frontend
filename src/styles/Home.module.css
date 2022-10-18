@@ -1,38 +1,27 @@
 .container {
   padding: 0 2rem;
+  margin: 0 auto;
+  max-width: 40rem;
 }
 
 .main {
   min-height: 100vh;
   padding: 2rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-family: 'Sharp Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Helvetica, Arial, sans-serif;
 }
 
 .footer {
-  display: flex;
-  flex: 1;
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .title,
@@ -132,26 +121,15 @@
 }
 
 .logo {
-  height: 1em;
-  margin-left: 0.5rem;
+  fill: var(--font-color-heading);
+  height: 3rem;
+  width: 3rem;
+  margin: 0 auto;
 }
 
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
   }
 }

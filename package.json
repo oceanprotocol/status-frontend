@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@oceanprotocol/typographies": "^0.1.0",
+    "@svgr/webpack": "^6.5.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.3",
     "next": "12.3.1",

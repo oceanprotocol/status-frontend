@@ -15,7 +15,7 @@ export async function getData(): Promise<Status[][]> {
 
     return data
   } catch (error) {
-    console.log(error)
+    console.error(error.message)
   }
 }
 
@@ -56,7 +56,7 @@ export function getSummary(network: string, data: Status[][]): Summary[] {
       return summary
     }
   } catch (error) {
-    console.log(error)
+    console.error(error.message)
   }
 }
 
@@ -66,11 +66,12 @@ export function getNetworkSUmmary(data: Status[][]): NetworkSummary[] {
   networks.forEach((network) => {
     const summary = getSummary(network, data)
     let status = State.Up
-    summary.forEach((service) => {
+
+    summary?.forEach((service) => {
       if (service.status === State.Down) return (status = State.Down)
     })
     if (status === State.Up) {
-      summary.forEach((service) => {
+      summary?.forEach((service) => {
         if (service.status === State.Warning) return (status = State.Warning)
       })
     }
