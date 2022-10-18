@@ -3,9 +3,11 @@ import { NetworkSummary, State, Status, Summary } from '../@types'
 import { statusApiUri } from '../../app.config'
 import { availableNetworks } from '../../app.config'
 
-export async function getData(): Promise<Status[]> {
+export async function getData(): Promise<Status[][]> {
   try {
-    const response: AxiosResponse<Status[]> = await axios.get(`${statusApiUri}`)
+    const response: AxiosResponse<Status[][]> = await axios.get(
+      `${statusApiUri}`
+    )
     if (!response || response.status !== 200 || !response.data)
       console.log('ERROR: no data recieved')
 
@@ -17,12 +19,13 @@ export async function getData(): Promise<Status[]> {
   }
 }
 
-export function getSummary(network: string, data: Status[]): Summary[] {
+export function getSummary(network: string, data: Status[][]): Summary[] {
   try {
     if (data) {
       let status: Status
+
       data.forEach((element) => {
-        if (element.network === network) return (status = element)
+        if (element[0].network === network) return (status = element[0])
       })
 
       const summary: Summary[] = [
@@ -57,7 +60,7 @@ export function getSummary(network: string, data: Status[]): Summary[] {
   }
 }
 
-export function getNetworkSUmmary(data: Status[]): NetworkSummary[] {
+export function getNetworkSUmmary(data: Status[][]): NetworkSummary[] {
   const networks: string[] = JSON.parse(availableNetworks)
   const networkSummary: NetworkSummary[] = []
   networks.forEach((network) => {
