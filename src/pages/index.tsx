@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import React, { Fragment, ReactElement, useEffect, useState } from 'react'
-import { State, Summary, NetworkSummary } from '../@types'
+import { State, Status } from '../@types'
 import styles from '../styles/Home.module.css'
-import { getData, getNetworkSUmmary, getSummary } from '../utils/getData'
+import { getData } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
 import CheckAsset from '../images/check.svg'
 
@@ -27,16 +27,12 @@ function statusStyle(state: State) {
 }
 
 export default function HomePage(): ReactElement {
-  const [summary, setSummary] = useState<Summary[]>()
-  const [networks, setNetworks] = useState<NetworkSummary[]>()
+  const [data, setData] = useState<{ [key: string]: Status }>()
 
   useEffect(() => {
     async function getStatuses() {
-      const statusData = await getData()
-      const summaryData = getSummary('mainnet', statusData)
-      if (summaryData) setSummary(summaryData)
-      const networkSummary = getNetworkSUmmary(statusData)
-      if (networkSummary) setNetworks(networkSummary)
+      const data = await getData()
+      setData(data)
     }
     getStatuses()
   }, [])
@@ -53,39 +49,48 @@ export default function HomePage(): ReactElement {
         <LogoAsset className={styles.logo} />
 
         <h1 className={styles.title}>Ocean Status</h1>
-        <p className={styles.description}>
-          Current Status of Ocean Components{' '}
-        </p>
+        <p className={styles.description}>Current Status of Ocean Components</p>
       </header>
 
       <main>
-        {networks?.map((network: NetworkSummary, i: number) => (
-          <Fragment key={i}>
-            <h2 className={styles.networkName}>{network.name}</h2>
-
+        {Object.entries(data || {}).map(([key, value]) => (
+          <Fragment key={key}>
+            <h2 className={styles.networkName}>{key}</h2>
             <div className={styles.grid}>
-              {summary?.map((value: Summary) => (
-                <div
-                  key={value.component}
-                  className={`${styles.card} ${statusStyle(value.status)}`}
-                >
-                  <h2>
-                    {statusIcon(value.status)} {value.component}
-                  </h2>
-                  <code className={styles.version}>{value.version}</code>
-                </div>
-              ))}
+              {Object.entries(value)
+                .filter(
+                  // TODO: Remove this filter if we fix this on API level
+                  // Needs a new `components` key under Status response
+                  ([key]) =>
+                    key !== 'currentBlock' &&
+                    key !== 'lastUpdatedOn' &&
+                    key !== 'network' &&
+                    key !== '_id' &&
+                    key !== '__v'
+                )
+                .map(([key, value]) => (
+                  <div
+                    key={key}
+                    className={`${styles.card} ${statusStyle(
+                      // TODO: all component states should be of type Status on API level
+                      key === 'market' || key === 'dataFarming'
+                        ? value
+                        : value.status
+                    )}`}
+                  >
+                    <h2>
+                      {statusIcon(
+                        key === 'market' || key === 'dataFarming'
+                          ? value
+                          : value.status
+                      )}{' '}
+                      {key}
+                    </h2>
+                    <code className={styles.version}>{value.version}</code>
+                  </div>
+                ))}
             </div>
           </Fragment>
-          // <button
-          //   key={i}
-          //   className={`${styles.network} ${networkStyle(network.name)}`}
-          //   onClick={() => setNetwork(network.name)}
-          // >
-          //   <span>
-          //     {network.name} {statusIcon(network.status)}
-          //   </span>
-          // </button>
         ))}
       </main>
 

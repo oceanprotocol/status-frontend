@@ -22,6 +22,7 @@ export interface Status {
   daoGrants: State
   lastUpdatedOn: number
 }
+
 export interface ProviderStatus {
   status: State
   response?: number
@@ -55,6 +56,7 @@ export interface OperatorStatus {
   environments?: number
   limitReached?: boolean
 }
+
 export interface FaucetStatus {
   status: State
   response?: number
@@ -62,24 +64,4 @@ export interface FaucetStatus {
   ethBalanceSufficient?: boolean
   oceanBalance?: BigNumber
   oceanBalanceSufficient?: boolean
-}
-
-export interface Network {
-  name: string
-  chainId: string
-  test?: boolean
-  faucetWallet?: string
-  rpcUrl?: string
-  oceanAddress?: string
-}
-
-export interface Summary {
-  component: string
-  status: State
-  version?: string
-}
-
-export interface NetworkSummary {
-  name: string
-  status: State
 }
