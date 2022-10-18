@@ -29,17 +29,6 @@
   flex-grow: 1;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   margin: 0;
   line-height: 1.15;
@@ -84,6 +73,7 @@
   max-width: 300px;
   min-width: 150px;
 }
+
 .network {
   display: inline-block;
   border: 1px solid;
@@ -101,19 +91,23 @@
   font-weight: 600;
   transition: 0.2s ease-out;
 }
+
 .networkUnselected {
   color: #8b98a9;
   background: #fff;
   border-color: #e2e2e2;
 }
+
 .networkUnselected:hover {
   color: #41474e;
 }
+
 .networkSelected {
   color: #fcfcfc;
   background: #41474e;
   border-color: #fcfcfc;
 }
+
 .up {
   border: 2px solid #5fb359;
 }
