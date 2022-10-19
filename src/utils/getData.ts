@@ -8,7 +8,8 @@ export async function getData(): Promise<{ [key: string]: Status }> {
     if (!response?.data || response.status !== 200)
       throw Error('ERROR: no data recieved')
 
-    // transform data into object with network names as keys
+    // transform data into object with network names as keys,
+    // and make sure 'general' is always the first key
     const output = Object.fromEntries(
       response.data?.map((item) => [item.network, item])
     )

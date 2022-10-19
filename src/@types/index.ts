@@ -10,50 +10,24 @@ export enum State {
 
 export interface Status {
   network: string
-  currentBlock: number
   lastUpdatedOn: number
-  components: {
-    market: ComponentStatusBase
-    faucet: FaucetStatus | Record<string, never>
-    aquarius: AquariusStatus
-    provider: ProviderStatus
-    subgraph: SubgraphStatus
-    operator: OperatorStatus
-    dataFarming: ComponentStatusBase
-  }
+  currentBlock?: number
+  components: Component[]
 }
 
-export interface ComponentStatusBase {
+export interface Component {
+  name: string
   status: State
   statusMessages: string[]
   response: number
   version: string
-}
-
-export interface ProviderStatus extends ComponentStatusBase {
-  latestRelease: string
-}
-
-export interface AquariusStatus extends ComponentStatusBase {
-  validChainList: boolean
-  monitorVersion: string
-  latestRelease: string
-  block: number
-  validQuery: boolean
-}
-
-export interface SubgraphStatus extends ComponentStatusBase {
-  latestRelease: string
-  block: number
-}
-
-export interface OperatorStatus extends ComponentStatusBase {
-  latestRelease: string
-  environments: number
-  limitReached: boolean
-}
-
-export interface FaucetStatus extends ComponentStatusBase {
+  latestRelease?: string
+  validChainList?: boolean
+  monitorVersion?: string
+  block?: number
+  validQuery?: boolean
+  environments?: number
+  limitReached?: boolean
   ethBalance?: BigNumber
   ethBalanceSufficient?: boolean
   oceanBalance?: BigNumber
