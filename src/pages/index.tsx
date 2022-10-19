@@ -37,7 +37,7 @@ export default function HomePage(): ReactElement {
     async function getStatuses() {
       setIsloading(true)
       const data = await getData()
-      if (!data) setError(`Could not fetch data from ${statusApiUri}`)
+      if (!data) setError(`Could not get data from ${statusApiUri}`)
       setData(data)
       setIsloading(false)
     }
@@ -76,7 +76,9 @@ export default function HomePage(): ReactElement {
         ) : (
           Object.entries(data || {}).map(([networkName, value]) => (
             <Fragment key={networkName}>
-              <h2 className={styles.networkName}>{networkName}</h2>
+              <h2 className={styles.networkName}>
+                {networkName == 'general' ? null : networkName}
+              </h2>
               <div className={styles.grid}>
                 {value.components.map((component) => (
                   <div
