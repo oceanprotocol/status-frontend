@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import { getData } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
 import CheckAsset from '../images/check.svg'
+import GithubAsset from '../images/github.svg'
 import addresses from '@oceanprotocol/contracts/addresses/address.json'
 import { statusApiUri } from '../../app.config'
 import relativeDate from 'tiny-relative-date'
@@ -99,7 +100,15 @@ export default function HomePage(): ReactElement {
                     )}`}
                   >
                     <h2 className={styles.titleComponent}>
-                      {statusIcon(component.status)} {component.name}
+                      {statusIcon(component.status)}{' '}
+                      <a
+                        href=""
+                        title="Go to tested endpoint"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {component.name}
+                      </a>
                       <code className={styles.version} title="deployed version">
                         {component.version}
                       </code>
@@ -116,6 +125,21 @@ export default function HomePage(): ReactElement {
                         )}
                       </ul>
                     ) : null}
+                    <footer className={styles.links}>
+                      {component.name !== 'data-farming' &&
+                        component.name !== 'cexa' && (
+                          <a
+                            href={`https://github.com/oceanprotocol/${
+                              component.name === 'subgraph' ? 'ocean-' : ''
+                            }${component.name}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Go to GitHub repository"
+                          >
+                            <GithubAsset className={styles.icon} />
+                          </a>
+                        )}
+                    </footer>
                   </div>
                 ))}
               </div>

@@ -59,11 +59,45 @@
   border-radius: var(--border-radius);
   box-shadow: 0 6px 17px 0 var(--box-shadow-color);
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .titleComponent {
   font-size: var(--font-size-large);
   margin: 0;
+  width: 100%;
+}
+
+.titleComponent a {
+  color: inherit;
+}
+
+.titleComponent a:hover,
+.titleComponent a:focus {
+  color: var(--color-primary);
+}
+
+.links {
+  width: calc(100% + 1rem);
+  margin-top: calc(var(--spacer) / 2);
+  font-size: var(--font-size-small);
+  text-align: right;
+  margin-bottom: -1.2rem;
+  margin-right: -1rem;
+  align-self: flex-end;
+}
+
+.links svg {
+  display: inline-block;
+  stroke: var(--color-secondary);
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.links a:hover svg,
+.links a:focus svg {
+  stroke: var(--color-primary);
 }
 
 .warning {
@@ -97,6 +131,7 @@
 }
 
 .messages {
+  width: 100%;
   list-style-type: square;
   margin-left: 1rem;
   margin-top: calc(var(--spacer) / 4);
@@ -130,6 +165,7 @@
 
 .contracts .titleComponent {
   display: inline-block;
+  width: auto;
 }
 
 .loading {
