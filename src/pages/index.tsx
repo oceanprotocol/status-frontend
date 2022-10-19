@@ -7,6 +7,7 @@ import LogoAsset from '../images/logo.svg'
 import CheckAsset from '../images/check.svg'
 import addresses from '@oceanprotocol/contracts/addresses/address.json'
 import { statusApiUri } from '../../app.config'
+import relativeDate from 'tiny-relative-date'
 
 function statusIcon(state: State): ReactElement {
   if (state === State.Up) {
@@ -77,7 +78,17 @@ export default function HomePage(): ReactElement {
           Object.entries(data || {}).map(([networkName, value]) => (
             <Fragment key={networkName}>
               <h2 className={styles.networkName}>
-                {networkName == 'general' ? null : networkName}
+                {networkName == 'general' ? null : (
+                  <>
+                    {networkName}
+                    <span
+                      className={styles.date}
+                      title={`Last update: ${new Date(value.lastUpdatedOn)}`}
+                    >
+                      {relativeDate(new Date(value.lastUpdatedOn))}
+                    </span>
+                  </>
+                )}
               </h2>
               <div className={styles.grid}>
                 {value.components.map((component) => (

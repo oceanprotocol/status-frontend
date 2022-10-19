@@ -136,3 +136,10 @@
   margin-top: 30vh;
   text-align: center;
 }
+
+.date {
+  display: inline-block;
+  margin-left: calc(var(--spacer) / 6);
+  font-size: var(--font-size-small);
+  color: var(--color-secondary);
+}
