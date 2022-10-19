@@ -92,12 +92,17 @@
   list-style-type: square;
   margin-left: 1rem;
   margin-top: calc(var(--spacer) / 4);
+  color: var(--color-secondary);
+  font-size: var(--font-size-small);
 }
 
 .messages li {
   display: list-item;
   margin-top: calc(var(--spacer) / 8);
   list-style-position: outside;
+}
+
+.warning .messages {
   color: var(--brand-alert-orange);
 }
 

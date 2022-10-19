@@ -11,19 +11,21 @@ export enum State {
 export interface Status {
   network: string
   currentBlock: number
-  market: State
-  faucet: FaucetStatus | Record<string, never>
-  aquarius: AquariusStatus
-  provider: ProviderStatus
-  subgraph: SubgraphStatus
-  operator: OperatorStatus
-  dataFarming: State
   lastUpdatedOn: number
+  components: {
+    market: ComponentStatusBase
+    faucet: FaucetStatus | Record<string, never>
+    aquarius: AquariusStatus
+    provider: ProviderStatus
+    subgraph: SubgraphStatus
+    operator: OperatorStatus
+    dataFarming: ComponentStatusBase
+  }
 }
 
 export interface ComponentStatusBase {
   status: State
-  statusMessages: string
+  statusMessages: string[]
   response: number
   version: string
 }
