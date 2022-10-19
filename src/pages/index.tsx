@@ -45,7 +45,7 @@ export default function HomePage(): ReactElement {
   }, [])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.app}>
       <Head>
         <title>Ocean Protocol Status</title>
         <meta
@@ -55,7 +55,7 @@ export default function HomePage(): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
+      <header className={styles.header}>
         <LogoAsset className={styles.logo} />
 
         <h1 className={styles.title}>Ocean Protocol Status</h1>
@@ -68,7 +68,7 @@ export default function HomePage(): ReactElement {
         </p>
       </header>
 
-      <main>
+      <main className={styles.content}>
         {isLoading ? (
           <div className={styles.loading}>Loading...</div>
         ) : error ? (

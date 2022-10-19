@@ -1,4 +1,4 @@
-.container {
+.app {
   padding: var(--spacer);
   margin: 0 auto;
   background: url('../../node_modules/@oceanprotocol/art/waves/waves.svg')
@@ -7,9 +7,16 @@
 }
 
 @media screen and (min-width: 50rem) {
-  .container {
+  .app {
     padding: calc(var(--spacer) * 2);
   }
+}
+
+.header,
+.content,
+.footer {
+  max-width: 70rem;
+  margin: 0 auto;
 }
 
 .footer {

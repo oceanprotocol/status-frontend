@@ -14,7 +14,7 @@ export async function getData(): Promise<{ [key: string]: Status }> {
     )
     // make sure 'general' is always the first key
     output = Object.assign({ general: output['general'] }, output)
-    console.log('Got new data', JSON.stringify(output))
+    console.log('Got new data', output)
     return output
   } catch (error) {
     console.error(error.message)
