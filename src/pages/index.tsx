@@ -153,12 +153,19 @@ export default function HomePage(): ReactElement {
                   </summary>
                   <ul>
                     {Object.entries((addresses as any)[networkName]).map(
-                      ([key, value]) =>
+                      ([key, value]: [
+                        key: string,
+                        value: string | { [key: number]: string }
+                      ]) =>
                         key !== 'chainId' &&
                         key !== 'startBlock' && (
                           <li key={key}>
-                            <code className={styles.key}>{key}</code>:{' '}
-                            <code>{JSON.stringify(value)}</code>
+                            <code className={styles.key}>{key}</code>
+                            <code>
+                              {typeof value === 'string'
+                                ? value
+                                : JSON.stringify(value, null, 2)}
+                            </code>
                           </li>
                         )
                     )}

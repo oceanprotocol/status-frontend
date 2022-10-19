@@ -47,7 +47,9 @@
 
 .networkName {
   margin-top: calc(var(--spacer) * 3);
+  margin-bottom: var(--spacer);
   text-transform: capitalize;
+  line-height: 1;
 }
 
 .card {
@@ -155,17 +157,47 @@
 
 .contracts {
   margin-top: var(--spacer);
-  margin-left: 1rem;
 }
 
 .contracts summary {
-  margin-left: -1rem;
   cursor: pointer;
 }
 
 .contracts .titleComponent {
   display: inline-block;
   width: auto;
+  margin-bottom: calc(var(--spacer) / 2);
+}
+
+.contracts li {
+  padding: calc(var(--spacer) / 6) calc(var(--spacer) / 2);
+  border-top: 1px solid var(--border-color);
+}
+
+.contracts li:hover {
+  background: var(--background-highlight);
+}
+
+.contracts li:last-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.contracts li code {
+  display: block;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+@media screen and (min-width: 55rem) {
+  .contracts li {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+  }
+}
+
+.contracts .key {
+  font-weight: var(--font-weight-bold);
 }
 
 .loading {
@@ -174,7 +206,7 @@
 }
 
 .date {
-  display: inline-block;
+  display: inline;
   margin-left: calc(var(--spacer) / 4);
   font-size: var(--font-size-small);
   color: var(--color-secondary);
