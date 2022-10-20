@@ -22,6 +22,7 @@ export interface Component {
   response: number
   version: string
   latestRelease?: string
+  url?: string
   validChainList?: boolean
   monitorVersion?: string
   block?: number

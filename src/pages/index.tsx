@@ -102,7 +102,7 @@ export default function HomePage(): ReactElement {
                     <h2 className={styles.titleComponent}>
                       {statusIcon(component.status)}{' '}
                       <a
-                        href=""
+                        href={component.url}
                         title="Go to tested endpoint"
                         target="_blank"
                         rel="noreferrer"
