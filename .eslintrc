@@ -1,16 +1,3 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": ["./tsconfig.json"]
-  },
-  "extends": [
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["@typescript-eslint", "prettier"],
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off"
-  },
-  "env": { "es6": true, "node": true }
+  "extends": ["eslint:recommended", "next/core-web-vitals"]
 }

@@ -1,82 +1,36 @@
 import { BigNumber } from 'ethers'
 
+/* eslint-disable no-unused-vars */
 export enum State {
-  Up = 'UP',
-  Down = 'DOWN',
-  Warning = 'WARNING'
+  Normal = 'Normal',
+  Degraded = 'Degraded',
+  Outage = 'Outage'
 }
+/* eslint-enable no-unused-vars */
 
 export interface Status {
   network: string
-  currentBlock: number
-  market: State
-  port: State
-  faucet: FaucetStatus | Record<string, never>
-  aquarius: AquariusStatus
-  provider: ProviderStatus
-  subgraph: SubgraphStatus
-  operator: OperatorStatus
-  dataFarming: State
-  daoGrants: State
   lastUpdatedOn: number
-}
-export interface ProviderStatus {
-  status: State
-  response?: number
-  version?: string
-  latestRelease?: string
+  currentBlock?: number
+  components: Component[]
 }
 
-export interface AquariusStatus {
+export interface Component {
+  name: string
   status: State
-  response?: number
-  validChainList?: boolean
-  version?: string
-  monitorVersion?: string
+  statusMessages: string[]
+  response: number
+  version: string
   latestRelease?: string
+  url?: string
+  validChainList?: boolean
+  monitorVersion?: string
   block?: number
   validQuery?: boolean
-}
-export interface SubgraphStatus {
-  status: State
-  response?: number
-  version?: string
-  latestRelease?: string
-  block?: number
-}
-
-export interface OperatorStatus {
-  status: State
-  response?: number
-  version?: string
-  latestRelease?: string
   environments?: number
   limitReached?: boolean
-}
-export interface FaucetStatus {
-  status: State
-  response?: number
   ethBalance?: BigNumber
   ethBalanceSufficient?: boolean
   oceanBalance?: BigNumber
   oceanBalanceSufficient?: boolean
-}
-
-export interface Network {
-  name: string
-  chainId: string
-  test?: boolean
-  faucetWallet?: string
-  rpcUrl?: string
-  oceanAddress?: string
-}
-
-export interface Summary {
-  component: string
-  status: State
-}
-
-export interface NetworkSummary {
-  name: string
-  status: State
 }
