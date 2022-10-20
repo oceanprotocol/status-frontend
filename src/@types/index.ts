@@ -2,9 +2,9 @@ import { BigNumber } from 'ethers'
 
 /* eslint-disable no-unused-vars */
 export enum State {
-  Up = 'UP',
-  Down = 'DOWN',
-  Warning = 'WARNING'
+  Normal = 'Normal',
+  Degraded = 'Degraded',
+  Outage = 'Outage'
 }
 /* eslint-enable no-unused-vars */
 

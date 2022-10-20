@@ -11,9 +11,9 @@ import { statusApiUri } from '../../app.config'
 import relativeDate from 'tiny-relative-date'
 
 function statusIcon(state: State): ReactElement {
-  if (state === State.Up) {
+  if (state === State.Normal) {
     return <CheckAsset className={`${styles.icon} ${styles.check}`} />
-  } else if (state === State.Down) {
+  } else if (state === State.Outage) {
     return <span className={styles.icon}>🚨</span>
   } else {
     return <span className={styles.icon}>🚧</span>
@@ -21,9 +21,9 @@ function statusIcon(state: State): ReactElement {
 }
 
 function statusStyle(state: State) {
-  if (state === State.Down) {
+  if (state === State.Outage) {
     return styles.down
-  } else if (state === State.Warning) {
+  } else if (state === State.Degraded) {
     return styles.warning
   } else {
     return styles.up
