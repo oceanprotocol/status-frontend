@@ -1,10 +1,9 @@
 import axios, { AxiosResponse } from 'axios'
 import { Status } from '../@types'
-import { statusApiUri } from '../../app.config'
 
-export async function getData(): Promise<{ [key: string]: Status }> {
+export async function getData(url: string): Promise<{ [key: string]: Status }> {
   try {
-    const response: AxiosResponse<Status[]> = await axios.get(`${statusApiUri}`)
+    const response: AxiosResponse<Status[]> = await axios.get(url)
     if (!response?.data || response.status !== 200)
       throw Error('ERROR: no data recieved')
 

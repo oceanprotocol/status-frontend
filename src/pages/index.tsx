@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import React, { Fragment, ReactElement, useEffect, useState } from 'react'
-import { State, Status } from '../@types'
+import React, { Fragment, ReactElement } from 'react'
+import { State } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
@@ -9,6 +9,7 @@ import GithubAsset from '../images/github.svg'
 import addresses from '@oceanprotocol/contracts/addresses/address.json'
 import { statusApiUri } from '../../app.config'
 import relativeDate from 'tiny-relative-date'
+import useSWR from 'swr'
 
 function statusIcon(state: State): ReactElement {
   if (state === State.Normal) {
@@ -31,20 +32,10 @@ function statusStyle(state: State) {
 }
 
 export default function HomePage(): ReactElement {
-  const [data, setData] = useState<{ [key: string]: Status }>()
-  const [isLoading, setIsloading] = useState<boolean>()
-  const [error, setError] = useState<string>()
-
-  useEffect(() => {
-    async function getStatuses() {
-      setIsloading(true)
-      const data = await getData()
-      if (!data) setError(`Could not get data from ${statusApiUri}`)
-      setData(data)
-      setIsloading(false)
-    }
-    getStatuses()
-  }, [])
+  const { data, error } = useSWR(statusApiUri, getData, {
+    refreshInterval: 60000
+  })
+  const isLoading = !data && !error
 
   return (
     <div className={styles.app}>
