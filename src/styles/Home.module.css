@@ -102,11 +102,11 @@
   stroke: var(--color-primary);
 }
 
-.warning {
+.degraded {
   border-color: var(--brand-alert-yellow);
 }
 
-.down {
+.outage {
   border-color: var(--brand-alert-red);
 }
 
@@ -147,11 +147,11 @@
   list-style-position: outside;
 }
 
-.warning .messages {
+.degraded .messages {
   color: var(--brand-alert-orange);
 }
 
-.down .messages {
+.outage .messages {
   color: var(--brand-alert-red);
 }
 

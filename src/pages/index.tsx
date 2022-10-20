@@ -22,11 +22,11 @@ function statusIcon(state: State): ReactElement {
 
 function statusStyle(state: State) {
   if (state === State.Outage) {
-    return styles.down
+    return styles.outage
   } else if (state === State.Degraded) {
-    return styles.warning
+    return styles.degraded
   } else {
-    return styles.up
+    return styles.normal
   }
 }
 
