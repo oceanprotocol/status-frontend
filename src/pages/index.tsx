@@ -122,7 +122,11 @@ export default function HomePage(): ReactElement {
                           <a
                             href={`https://github.com/oceanprotocol/${
                               component.name === 'subgraph' ? 'ocean-' : ''
-                            }${component.name}`}
+                            }${
+                              component.name === 'event-monitor'
+                                ? 'aquarius'
+                                : component.name
+                            }`}
                             target="_blank"
                             rel="noreferrer"
                             title="Go to GitHub repository"
