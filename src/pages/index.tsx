@@ -1,35 +1,14 @@
 import Head from 'next/head'
 import React, { Fragment, ReactElement } from 'react'
-import { State } from '../@types'
 import styles from '../styles/Home.module.css'
 import { getData } from '../utils/getData'
 import LogoAsset from '../images/logo.svg'
-import CheckAsset from '../images/check.svg'
 import GithubAsset from '../images/github.svg'
 import addresses from '@oceanprotocol/contracts/addresses/address.json'
 import { statusApiUri } from '../../app.config'
 import relativeDate from 'tiny-relative-date'
 import useSWR from 'swr'
-
-function statusIcon(state: State): ReactElement {
-  if (state === State.Normal) {
-    return <CheckAsset className={`${styles.icon} ${styles.check}`} />
-  } else if (state === State.Outage) {
-    return <span className={styles.icon}>🚨</span>
-  } else {
-    return <span className={styles.icon}>🚧</span>
-  }
-}
-
-function statusStyle(state: State) {
-  if (state === State.Outage) {
-    return styles.outage
-  } else if (state === State.Degraded) {
-    return styles.degraded
-  } else {
-    return styles.normal
-  }
-}
+import { statusIcon, statusStyle } from '../utils/statusHelpers'
 
 export default function HomePage(): ReactElement {
   const { data, error } = useSWR(statusApiUri, getData, {
