@@ -1,60 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js'
-import { Bar } from 'react-chartjs-2'
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart'
-    }
-  }
-}
+import React from 'react'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import LogoAsset from '../images/logo.svg'
+import Chart from '../components/chart'
 
 export default function Stats() {
-  const [chartData, setChartData] = useState(null)
+  return (
+    <div className={styles.app}>
+      <Head>
+        <title>Ocean Protocol Stats</title>
+        <meta
+          name="description"
+          content="Status overview of all deployed components hosted by the Ocean Protocol Foundation."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header className={styles.header}>
+        <LogoAsset className={styles.logo} />
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch('http://localhost:8000/stats/core/publishedNFT')
-      const data = await res.json()
-      console.log(data)
-
-      // Assuming the response data is an object with keys as labels and values as data points
-      const labels = Object.keys(data)
-      const datasetData = Object.values(data)
-
-      setChartData({
-        labels: labels,
-        datasets: [
-          {
-            label: 'NFTS Published',
-            data: datasetData
-          }
-        ]
-      })
-    }
-
-    fetchData()
-  }, [])
-
-  if (!chartData) {
-    return <div>Loading...</div>
-  }
-
-  return <Bar options={options} data={chartData} />
+        <h1 className={styles.title}>Ocean Protocol Stats</h1>
+        <p className={styles.description}>Stats for usage of Ocean Protocol.</p>
+      </header>{' '}
+      <main>
+        <div className={styles.grid}>
+          <Chart path="/stats/core/publishedNFT" title="publishedNFT" />
+        </div>
+      </main>
+    </div>
+  )
 }
