@@ -8,9 +8,6 @@ function MenuLink({ name, path }: { name: string; path: string }) {
 
   const classes =
     router?.pathname === path ? `${styles.link} ${styles.active}` : styles.link
-  console.log(name, path)
-  console.log('classes', classes)
-  console.log('router', router.pathname)
 
   return (
     <Link href={path} className={classes}>

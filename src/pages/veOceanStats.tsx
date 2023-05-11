@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import LogoAsset from '../images/logo.svg'
 import Chart from '../components/Chart'
-import stats from '../config/coreStats.json'
+import stats from '../config/veOceanStats.json'
 
 export default function Stats() {
   return (
