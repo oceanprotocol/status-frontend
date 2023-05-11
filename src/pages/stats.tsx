@@ -2,7 +2,8 @@ import React from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import LogoAsset from '../images/logo.svg'
-import Chart from '../components/chart'
+import Chart from '../components/Chart'
+import stats from '../config/coreStats.json'
 
 export default function Stats() {
   return (
@@ -22,8 +23,10 @@ export default function Stats() {
         <p className={styles.description}>Stats for usage of Ocean Protocol.</p>
       </header>{' '}
       <main>
-        <div className={styles.grid}>
-          <Chart path="/stats/core/publishedNFT" title="publishedNFT" />
+        <div className={styles.chartGrid}>
+          {stats.map((chart) => (
+            <Chart key={chart.title} path={chart.path} title={chart.title} />
+          ))}
         </div>
       </main>
     </div>

@@ -1,0 +1,27 @@
+[
+  { "title": "NFTs Published", "path": "/stats/core/publishedNFT" },
+  { "title": "Unique Consumers", "path": "/stats/core/uniqueConsumers" },
+  {
+    "title": "Weekly Unique Publish Markets",
+    "path": "/stats/core/weeklyUniquePublishMarkets"
+  },
+  {
+    "title": "Montly Unique Publish Markets",
+    "path": "/stats/core/montlyUniquePublishMarkets"
+  },
+  {
+    "title": "Yearly Unique Publish Markets",
+    "path": "/stats/core/yearlyUniquePublishMarkets"
+  },
+  {
+    "title": "Total Unique Publish Markets",
+    "path": "/stats/core/totalUniquePublishMarkets"
+  },
+  {
+    "title": "Unique Consume Markets",
+    "path": "/stats/core/uniqueConsumeMarkets"
+  },
+  { "title": "Free Consumes", "path": "/stats/core/freeConsumes" },
+  { "title": "Paid Consumes", "path": "/stats/core/paidConsumes" },
+  { "title": "Ocean Consumes", "path": "/stats/core/oceanConsumes" }
+]

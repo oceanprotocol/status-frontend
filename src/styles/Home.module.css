@@ -1,5 +1,6 @@
 .app {
   padding: var(--spacer);
+  padding-top: 0px;
   margin: 0 auto;
   background: url('../../node_modules/@oceanprotocol/art/waves/waves.svg')
     no-repeat center 13.5rem;
@@ -9,6 +10,7 @@
 @media screen and (min-width: 50rem) {
   .app {
     padding: calc(var(--spacer) * 2);
+    padding-top: 0px;
   }
 }
 
@@ -42,6 +44,12 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--spacer);
+}
+
+.chartGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
   gap: var(--spacer);
 }
 
