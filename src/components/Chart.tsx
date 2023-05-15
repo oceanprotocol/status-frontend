@@ -15,12 +15,18 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default function Chart({
   path,
-  title
+  title,
+  from,
+  to
 }: {
   path: string
   title: string
+  from: number
+  to: number
 }): ReactElement {
   const [chartData, setChartData] = useState(null)
+  console.log('from: ', from)
+  console.log('to: ', to)
 
   const options = {
     responsive: true,
@@ -37,7 +43,9 @@ export default function Chart({
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`http://localhost:8000${path}`)
+      const res = await fetch(
+        `http://localhost:8000${path}?since=${from}&limit=${to}`
+      )
       const data = await res.json()
       console.log(data)
 

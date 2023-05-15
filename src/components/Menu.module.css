@@ -40,6 +40,10 @@
   display: none;
 }
 
+.dateSelection {
+  display: inline;
+}
+
 .navigation li {
   display: inline-block;
   vertical-align: middle;
