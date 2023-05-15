@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import LogoAsset from '../images/logo.svg'
 import Chart from '../components/Chart'
@@ -27,7 +28,9 @@ export default function Stats() {
       <main>
         <div className={styles.chartGrid}>
           {stats.map((chart) => (
-            <Chart key={chart.title} path={chart.path} title={chart.title} />
+            <Link href={`/stats/${chart.name}`} key={chart.title}>
+              <Chart key={chart.title} path={chart.path} title={chart.title} />
+            </Link>
           ))}
         </div>
       </main>
