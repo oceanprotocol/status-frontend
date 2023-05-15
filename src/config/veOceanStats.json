@@ -1,0 +1,6 @@
+[
+  { "title": "Deposits", "path": "/deposits" },
+  { "title": "Actions", "path": "/actions" },
+  { "title": "Weekly Locked Amount", "path": "/weeklyLockedAmount" },
+  { "title": "Allocations", "path": "/allocations" }
+]
