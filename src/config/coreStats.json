@@ -1,27 +1,52 @@
 [
-  { "title": "NFTs Published", "path": "/stats/core/publishedNFT" },
-  { "title": "Unique Consumers", "path": "/stats/core/uniqueConsumers" },
   {
+    "name": "publishedNFT",
+    "title": "NFTs Published",
+    "path": "/stats/core/publishedNFT"
+  },
+  {
+    "name": "uniqueConsumers",
+    "title": "Unique Consumers",
+    "path": "/stats/core/uniqueConsumers"
+  },
+  {
+    "name": "weeklyUniquePublishMarkets",
     "title": "Weekly Unique Publish Markets",
     "path": "/stats/core/weeklyUniquePublishMarkets"
   },
   {
+    "name": "montlyUniquePublishMarkets",
     "title": "Montly Unique Publish Markets",
     "path": "/stats/core/montlyUniquePublishMarkets"
   },
   {
+    "name": "yearlyUniquePublishMarkets",
     "title": "Yearly Unique Publish Markets",
     "path": "/stats/core/yearlyUniquePublishMarkets"
   },
   {
+    "name": "totalUniquePublishMarkets",
     "title": "Total Unique Publish Markets",
     "path": "/stats/core/totalUniquePublishMarkets"
   },
   {
+    "name": "uniqueConsumeMarkets",
     "title": "Unique Consume Markets",
     "path": "/stats/core/uniqueConsumeMarkets"
   },
-  { "title": "Free Consumes", "path": "/stats/core/freeConsumes" },
-  { "title": "Paid Consumes", "path": "/stats/core/paidConsumes" },
-  { "title": "Ocean Consumes", "path": "/stats/core/oceanConsumes" }
+  {
+    "name": "freeConsumes",
+    "title": "Free Consumes",
+    "path": "/stats/core/freeConsumes"
+  },
+  {
+    "name": "paidConsumes",
+    "title": "Paid Consumes",
+    "path": "/stats/core/paidConsumes"
+  },
+  {
+    "name": "oceanConsumes",
+    "title": "Ocean Consumes",
+    "path": "/stats/core/oceanConsumes"
+  }
 ]
